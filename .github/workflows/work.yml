@@ -1,0 +1,16 @@
+name: WorkFlow Test
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      - main
+
+jobs:
+  My-Job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 한번 출력
+        run: echo "work! work!"
