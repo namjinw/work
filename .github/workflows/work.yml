@@ -1,5 +1,7 @@
 name: WorkFlow Test
 
+
+# 실행 조건
 on:
   push:
     branches:
@@ -7,10 +9,35 @@ on:
     pull_request:
       - main
 
+# 1개의 job로 구성
+
 jobs:
+
+  # job 구별 Id
   My-Job:
     runs-on: ubuntu-latest
 
+    # 실행 단위
     steps:
       - name: 한번 출력
         run: echo "work! work!"
+
+      - name: 작업 내용 가져오기
+        # 다른 사람이 만들어둔 자동화 기능(Action)을 가져와서 쓴다
+        # GitHub 저장소의 코드를 CI 서버로 다운로드
+        uses: actions/checkout@v4
+
+      - name: flutter 다운로드
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
