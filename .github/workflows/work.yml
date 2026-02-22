@@ -36,6 +36,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+        # 조심
       - name: Analyze
         run: flutter analyze
 
